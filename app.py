@@ -39,6 +39,6 @@ class TwitterBot:
             except Exception as ex:
                     time.sleep(60)
 
-mo = TwitterBot('motester47@gmail.com', 'Mo12345!')
+mo = TwitterBot('USERNAME', 'PASSWORD')
 mo.login()
 mo.like_tweet('webdevelopment')

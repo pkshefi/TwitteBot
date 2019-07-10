@@ -25,11 +25,19 @@ class TwitterBot:
         bot = self.bot
         bot.get('https://twitter.com/search?q='+hashtag+'&src=typed_query')
         time.sleep(3)
-        bot.execute_script('window.scrollTo(0,document.body.scrollHeight)') 
-        time.sleep(2)
-        tweets = bot.find_elements_by_class_name('tweet')
-        links = [elem.get_attribute('data-permalink-path')
-        tweet]
+        for i in range(1,3):
+            bot.execute_script('window.scrollTo(0,document.body.scrollHeight)') 
+            time.sleep(2)
+            tweets = bot.find_elements_by_class_name('tweet')
+            links = [elem.get_attribute('data-permalink-path')
+                    for elem in tweets]
+        for link in links:
+            bot.get('https://twitter.com' + link)
+            try:
+                bot.find_element_by_class_name('HeartAnimation')
+                time.sleep(10)
+            except Exception as ex:
+                    time.sleep(60)
 
 mo = TwitterBot('motester47@gmail.com', 'Mo12345!')
 mo.login()
